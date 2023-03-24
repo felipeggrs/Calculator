@@ -17,7 +17,12 @@ clearBtn.addEventListener("click", () => {
 // add button
 const addBtn = document.querySelector(".addBtn");
 addBtn.addEventListener("click", () => {
-  if (display.textContent.match(/[-+*/]/)) {
+  if (display.textContent.match(/[-+*/]/) && display.textContent.match(/[=]/)) {
+    display.textContent = `${firstNumber}`;
+  } else if (display.textContent.match(/[-+*/]/)) {
+    calculation = display.textContent.split(/[-+*/]/);
+    secondNumber = +calculation[1];
+    firstNumber = `${operate(firstNumber, operator, secondNumber)}`;
     display.textContent = `${firstNumber}`;
   }
   firstNumber = +display.textContent;
@@ -28,34 +33,49 @@ addBtn.addEventListener("click", () => {
 // subtract button
 const subtractBtn = document.querySelector(".subtractBtn");
 subtractBtn.addEventListener("click", () => {
-  if (display.textContent.match(/[-+*/]/)) {
+  if (display.textContent.match(/[-+*/]/) && display.textContent.match(/[=]/)) {
     display.textContent = `${firstNumber}`;
-  }
+  } else if (display.textContent.match(/[-+*/]/)) {
+    calculation = display.textContent.split(/[-+*/]/);
+    secondNumber = +calculation[1];
+    firstNumber = `${operate(firstNumber, operator, secondNumber)}`;
+    display.textContent = `${firstNumber}`;
+}
   firstNumber = +display.textContent;
   operator = "-";
-  display.textContent += subtractBtn.textContent
+  display.textContent += subtractBtn.textContent;
 });
 
 // multiply button
 const multiplyBtn = document.querySelector(".multiplyBtn");
 multiplyBtn.addEventListener("click", () => {
-  if (display.textContent.match(/[-+*/]/)) {
+  if (display.textContent.match(/[-+*/]/) && display.textContent.match(/[=]/)) {
     display.textContent = `${firstNumber}`;
-  }
+  } else if (display.textContent.match(/[-+*/]/)) {
+    calculation = display.textContent.split(/[-+*/]/);
+    secondNumber = +calculation[1];
+    firstNumber = `${operate(firstNumber, operator, secondNumber)}`;
+    display.textContent = `${firstNumber}`;
+}
   firstNumber = +display.textContent;
   operator = "*";
-  display.textContent += multiplyBtn.textContent
+  display.textContent += multiplyBtn.textContent;
 });
 
 // divide button
 const divideBtn = document.querySelector(".divideBtn");
 divideBtn.addEventListener("click", () => {
-  if (display.textContent.match(/[-+*/]/)) {
+  if (display.textContent.match(/[-+*/]/) && display.textContent.match(/[=]/)) {
     display.textContent = `${firstNumber}`;
-  }
+  } else if (display.textContent.match(/[-+*/]/)) {
+    calculation = display.textContent.split(/[-+*/]/);
+    secondNumber = +calculation[1];
+    firstNumber = `${operate(firstNumber, operator, secondNumber)}`;
+    display.textContent = `${firstNumber}`;
+}
   firstNumber = +display.textContent;
   operator = "/";
-  display.textContent += divideBtn.textContent
+  display.textContent += divideBtn.textContent;
 });
 
 // equal button
