@@ -26,17 +26,26 @@
   width: 250px;
   margin: 25px;
 }
-.btn {
+.btn,
+.addBtn,
+.subtractBtn,
+.multiplyBtn,
+.divideBtn,
+.equalBtn,
+.clear {
   padding: 1em;
   width: 50px;
 }
 
-.btn.op,
-.btn.equal {
+.addBtn,
+.subtractBtn,
+.multiplyBtn,
+.divideBtn,
+.equalBtn {
   color: rgb(200, 45, 45);
   border: 1px solid rgb(200, 45, 45);
 }
 
-.btn.equal {
+.equalBtn {
   width: 224px;
 }
