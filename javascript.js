@@ -17,6 +17,9 @@ clearBtn.addEventListener("click", () => {
 // add button
 const addBtn = document.querySelector(".addBtn");
 addBtn.addEventListener("click", () => {
+  if (display.textContent.match(/[-+*/]/)) {
+    display.textContent = `${firstNumber}`;
+  }
   firstNumber = +display.textContent;
   operator = "+";
   display.textContent += addBtn.textContent;
@@ -25,6 +28,9 @@ addBtn.addEventListener("click", () => {
 // subtract button
 const subtractBtn = document.querySelector(".subtractBtn");
 subtractBtn.addEventListener("click", () => {
+  if (display.textContent.match(/[-+*/]/)) {
+    display.textContent = `${firstNumber}`;
+  }
   firstNumber = +display.textContent;
   operator = "-";
   display.textContent += subtractBtn.textContent
@@ -33,6 +39,9 @@ subtractBtn.addEventListener("click", () => {
 // multiply button
 const multiplyBtn = document.querySelector(".multiplyBtn");
 multiplyBtn.addEventListener("click", () => {
+  if (display.textContent.match(/[-+*/]/)) {
+    display.textContent = `${firstNumber}`;
+  }
   firstNumber = +display.textContent;
   operator = "*";
   display.textContent += multiplyBtn.textContent
@@ -41,6 +50,9 @@ multiplyBtn.addEventListener("click", () => {
 // divide button
 const divideBtn = document.querySelector(".divideBtn");
 divideBtn.addEventListener("click", () => {
+  if (display.textContent.match(/[-+*/]/)) {
+    display.textContent = `${firstNumber}`;
+  }
   firstNumber = +display.textContent;
   operator = "/";
   display.textContent += divideBtn.textContent
@@ -51,9 +63,10 @@ const equalBtn = document.querySelector(".equalBtn");
 equalBtn.addEventListener("click", () => {
   calculation = display.textContent.split(/[-+*/]/);
   secondNumber = +calculation[1];
-  display.textContent += ` ${equalBtn.textContent} ${operate(firstNumber, operator, secondNumber)}`
+  display.textContent += ` ${equalBtn.textContent} ${operate(firstNumber, operator, secondNumber)}`;
+  firstNumber = +`${operate(firstNumber, operator, secondNumber)}`;
+  console.log(firstNumber);
 });
-
 
 // digit buttons
 const buttons = document.querySelectorAll(".btn");
@@ -62,11 +75,6 @@ buttons.forEach(button => {
     display.textContent += button.textContent;
   })
 })
-
-
-
-
-
 
 // takes 3 arguments and works based on the operator used
 function operate(firstNumber, operator, secondNumber) {
