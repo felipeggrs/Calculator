@@ -22,7 +22,7 @@ addBtn.addEventListener("click", () => {
   } else if (display.textContent.match(/[-+*/]/)) {
     calculation = display.textContent.split(/[-+*/]/);
     secondNumber = +calculation[1];
-    firstNumber = `${operate(firstNumber, operator, secondNumber)}`;
+    firstNumber = `${(operate(firstNumber, operator, secondNumber).toFixed(3).replace(/\.?0+$/, ""))}`;
     display.textContent = `${firstNumber}`;
   }
   firstNumber = +display.textContent;
@@ -38,7 +38,7 @@ subtractBtn.addEventListener("click", () => {
   } else if (display.textContent.match(/[-+*/]/)) {
     calculation = display.textContent.split(/[-+*/]/);
     secondNumber = +calculation[1];
-    firstNumber = `${operate(firstNumber, operator, secondNumber)}`;
+    firstNumber = `${(operate(firstNumber, operator, secondNumber).toFixed(3).replace(/\.?0+$/, ""))}`;
     display.textContent = `${firstNumber}`;
 }
   firstNumber = +display.textContent;
@@ -54,7 +54,7 @@ multiplyBtn.addEventListener("click", () => {
   } else if (display.textContent.match(/[-+*/]/)) {
     calculation = display.textContent.split(/[-+*/]/);
     secondNumber = +calculation[1];
-    firstNumber = `${operate(firstNumber, operator, secondNumber)}`;
+    firstNumber = `${(operate(firstNumber, operator, secondNumber).toFixed(3).replace(/\.?0+$/, ""))}`;
     display.textContent = `${firstNumber}`;
 }
   firstNumber = +display.textContent;
@@ -70,7 +70,7 @@ divideBtn.addEventListener("click", () => {
   } else if (display.textContent.match(/[-+*/]/)) {
     calculation = display.textContent.split(/[-+*/]/);
     secondNumber = +calculation[1];
-    firstNumber = `${operate(firstNumber, operator, secondNumber)}`;
+    firstNumber = `${(operate(firstNumber, operator, secondNumber).toFixed(3).replace(/\.?0+$/, ""))}`;
     display.textContent = `${firstNumber}`;
 }
   firstNumber = +display.textContent;
@@ -83,9 +83,8 @@ const equalBtn = document.querySelector(".equalBtn");
 equalBtn.addEventListener("click", () => {
   calculation = display.textContent.split(/[-+*/]/);
   secondNumber = +calculation[1];
-  display.textContent += ` ${equalBtn.textContent} ${operate(firstNumber, operator, secondNumber)}`;
-  firstNumber = +`${operate(firstNumber, operator, secondNumber)}`;
-  console.log(firstNumber);
+  display.textContent += ` ${equalBtn.textContent} ${(operate(firstNumber, operator, secondNumber).toFixed(3).replace(/\.?0+$/, ""))}`;
+  firstNumber = +`${(operate(firstNumber, operator, secondNumber).toFixed(3).replace(/\.?0+$/, ""))}`;
 });
 
 // digit buttons
