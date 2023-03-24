@@ -83,6 +83,9 @@ const equalBtn = document.querySelector(".equalBtn");
 equalBtn.addEventListener("click", () => {
   calculation = display.textContent.split(/[-+*/]/);
   secondNumber = +calculation[1];
+  if (secondNumber === 0) {
+    return display.textContent = "Silly boy. You know better.";
+  }
   display.textContent += ` ${equalBtn.textContent} ${(operate(firstNumber, operator, secondNumber).toFixed(3).replace(/\.?0+$/, ""))}`;
   firstNumber = +`${(operate(firstNumber, operator, secondNumber).toFixed(3).replace(/\.?0+$/, ""))}`;
 });
