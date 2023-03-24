@@ -17,7 +17,7 @@ clearBtn.addEventListener("click", () => {
 // add button
 const addBtn = document.querySelector(".addBtn");
 addBtn.addEventListener("click", () => {
-  firstNumber = display.textContent;
+  firstNumber = +display.textContent;
   operator = "+";
   display.textContent += addBtn.textContent;
 });
@@ -25,7 +25,7 @@ addBtn.addEventListener("click", () => {
 // subtract button
 const subtractBtn = document.querySelector(".subtractBtn");
 subtractBtn.addEventListener("click", () => {
-  firstNumber = display.textContent;
+  firstNumber = +display.textContent;
   operator = "-";
   display.textContent += subtractBtn.textContent
 });
@@ -33,7 +33,7 @@ subtractBtn.addEventListener("click", () => {
 // multiply button
 const multiplyBtn = document.querySelector(".multiplyBtn");
 multiplyBtn.addEventListener("click", () => {
-  firstNumber = display.textContent;
+  firstNumber = +display.textContent;
   operator = "*";
   display.textContent += multiplyBtn.textContent
 });
@@ -41,7 +41,7 @@ multiplyBtn.addEventListener("click", () => {
 // divide button
 const divideBtn = document.querySelector(".divideBtn");
 divideBtn.addEventListener("click", () => {
-  firstNumber = display.textContent;
+  firstNumber = +display.textContent;
   operator = "/";
   display.textContent += divideBtn.textContent
 });
@@ -49,7 +49,9 @@ divideBtn.addEventListener("click", () => {
 // equal button
 const equalBtn = document.querySelector(".equalBtn");
 equalBtn.addEventListener("click", () => {
-  display.textContent += `${equalBtn.textContent}`
+  calculation = display.textContent.split(/[-+*/]/);
+  secondNumber = +calculation[1];
+  display.textContent += ` ${equalBtn.textContent} ${operate(firstNumber, operator, secondNumber)}`
 });
 
 
