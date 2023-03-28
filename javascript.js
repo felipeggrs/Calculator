@@ -86,8 +86,8 @@ divideBtn.addEventListener("click", () => {
 // equal button
 const equalBtn = document.querySelector(".equalBtn");
 equalBtn.addEventListener("click", () => {
-  calculation = display.textContent.split(/[-+*/]/);
-  secondNumber = +calculation[1];
+  calculation = display.textContent.split(/(-?\d+)\s*([-+*\/])\s*(-?\d+)/);
+  secondNumber = +calculation[3];
   if (secondNumber === 0) {
     return display.textContent = "Silly boy. You know better.";
   }
