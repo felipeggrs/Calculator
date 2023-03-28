@@ -11,6 +11,7 @@ clearBtn.addEventListener("click", () => {
   secondNumber = 0;
   operator = "";
   display.textContent = "";
+  dotBtn.addEventListener("click", dotClick);
 });
 
 // operator buttons
@@ -25,6 +26,7 @@ addBtn.addEventListener("click", () => {
     firstNumber = `${(operate(firstNumber, operator, secondNumber).toFixed(3).replace(/\.?0+$/, ""))}`;
     display.textContent = `${firstNumber}`;
   }
+  dotBtn.addEventListener("click", dotClick);
   firstNumber = +display.textContent;
   operator = "+";
   display.textContent += addBtn.textContent;
@@ -41,6 +43,7 @@ subtractBtn.addEventListener("click", () => {
     firstNumber = `${(operate(firstNumber, operator, secondNumber).toFixed(3).replace(/\.?0+$/, ""))}`;
     display.textContent = `${firstNumber}`;
 }
+  dotBtn.addEventListener("click", dotClick);
   firstNumber = +display.textContent;
   operator = "-";
   display.textContent += subtractBtn.textContent;
@@ -57,6 +60,7 @@ multiplyBtn.addEventListener("click", () => {
     firstNumber = `${(operate(firstNumber, operator, secondNumber).toFixed(3).replace(/\.?0+$/, ""))}`;
     display.textContent = `${firstNumber}`;
 }
+  dotBtn.addEventListener("click", dotClick);
   firstNumber = +display.textContent;
   operator = "*";
   display.textContent += multiplyBtn.textContent;
@@ -73,6 +77,7 @@ divideBtn.addEventListener("click", () => {
     firstNumber = `${(operate(firstNumber, operator, secondNumber).toFixed(3).replace(/\.?0+$/, ""))}`;
     display.textContent = `${firstNumber}`;
 }
+  dotBtn.addEventListener("click", dotClick);
   firstNumber = +display.textContent;
   operator = "/";
   display.textContent += divideBtn.textContent;
@@ -86,9 +91,18 @@ equalBtn.addEventListener("click", () => {
   if (secondNumber === 0) {
     return display.textContent = "Silly boy. You know better.";
   }
+  dotBtn.addEventListener("click", dotClick);
   display.textContent += ` ${equalBtn.textContent} ${(operate(firstNumber, operator, secondNumber).toFixed(3).replace(/\.?0+$/, ""))}`;
   firstNumber = +`${(operate(firstNumber, operator, secondNumber).toFixed(3).replace(/\.?0+$/, ""))}`;
 });
+
+// "." dot button
+function dotClick() {
+  display.textContent += dotBtn.textContent;
+  dotBtn.removeEventListener("click", dotClick); // only one "." per number
+}
+const dotBtn = document.querySelector(".dotBtn");
+dotBtn.addEventListener("click", dotClick);
 
 // digit buttons
 const buttons = document.querySelectorAll(".btn");
