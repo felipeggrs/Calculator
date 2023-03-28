@@ -108,7 +108,7 @@ dotBtn.addEventListener("click", dotClick);
 const buttons = document.querySelectorAll(".btn");
 buttons.forEach(button => {
   button.addEventListener("click", () => {
-    display.textContent += button.textContent;
+      display.textContent += button.textContent;
   })
 })
 
