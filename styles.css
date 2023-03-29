@@ -13,10 +13,11 @@ h3 {
   display: flex;
   flex-flow: column;
   align-items: center;
-  width: 320px;
+  width: 260px;
   border: 5px solid black;
   margin: 1em;
-  padding: 1em;
+  padding: 1em 1em 0.5em 1em;
+  background-color: rgb(255, 167, 26);
 }
 
 .display {
@@ -24,11 +25,14 @@ h3 {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  font-size: 140%;
+  font-size: 100%;
   border: 1px solid black;
   width: 200px;
   height: 80px;
   padding: 5px;
+  background-color: black;
+  color: white;
+  font-weight: bolder;
 }
 .calculatorContainer {
   display: flex;
@@ -37,6 +41,29 @@ h3 {
   gap: 5px;
   width: 250px;
   margin: 25px;
+}
+
+.clearContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.undo,
+.clear {
+  width: 50px;
+  height: 20px;
+  outline: 0;
+  cursor: pointer;
+  border: 2px solid #000;
+  border-radius: 3px;
+  color: #fff;
+  background: #000;
+  font-size: 12px;
+  font-weight: 600;
+  transition-duration: .15s;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(.4,0,.2,1);
 }
 
 .equalBtn {
@@ -57,7 +84,6 @@ h3 {
 
 .btn,
 .dotBtn,
-.clear,
 .addBtn,
 .subtractBtn,
 .multiplyBtn,
@@ -83,6 +109,7 @@ h3 {
 }
 
 .clear:hover,
+.undo:hover,
 .subtractBtn:hover,
 .divideBtn:hover {
   color: #000;

@@ -12,7 +12,17 @@ clearBtn.addEventListener("click", () => {
   operator = "";
   display.textContent = "";
   dotBtn.addEventListener("click", dotClick);
+  undoBtn.addEventListener("click", undoClick);
 });
+
+// Undo (U) button
+function undoClick() {
+  let undo = display.textContent.split("").slice(0, -1).join("");
+  return display.textContent = undo;
+}
+
+const undoBtn = document.querySelector(".undo");
+undoBtn.addEventListener("click", undoClick);
 
 // operator buttons
 // add button
@@ -29,6 +39,7 @@ addBtn.addEventListener("click", () => {
     display.textContent = `${firstNumber}`;
   }
   // user's first operation
+  undoBtn.addEventListener("click", undoClick);
   dotBtn.addEventListener("click", dotClick); // used to limit "." to 1 per number
   firstNumber = +display.textContent;
   operator = "+";
@@ -46,6 +57,7 @@ subtractBtn.addEventListener("click", () => {
     firstNumber = `${(operate(firstNumber, operator, secondNumber).toFixed(3).replace(/\.?0+$/, ""))}`;
     display.textContent = `${firstNumber}`;
 }
+  undoBtn.addEventListener("click", undoClick);
   dotBtn.addEventListener("click", dotClick);
   firstNumber = +display.textContent;
   operator = "-";
@@ -63,6 +75,7 @@ multiplyBtn.addEventListener("click", () => {
     firstNumber = `${(operate(firstNumber, operator, secondNumber).toFixed(3).replace(/\.?0+$/, ""))}`;
     display.textContent = `${firstNumber}`;
 }
+  undoBtn.addEventListener("click", undoClick);
   dotBtn.addEventListener("click", dotClick);
   firstNumber = +display.textContent;
   operator = "*";
@@ -80,6 +93,7 @@ divideBtn.addEventListener("click", () => {
     firstNumber = `${(operate(firstNumber, operator, secondNumber).toFixed(3).replace(/\.?0+$/, ""))}`;
     display.textContent = `${firstNumber}`;
 }
+  undoBtn.addEventListener("click", undoClick);
   dotBtn.addEventListener("click", dotClick);
   firstNumber = +display.textContent;
   operator = "/";
@@ -94,7 +108,8 @@ equalBtn.addEventListener("click", () => {
   if (secondNumber === 0) {
     return display.textContent = "Silly boy. You know better.";
   }
-  dotBtn.addEventListener("click", dotClick);
+  dotBtn.removeEventListener("click", dotClick);
+  undoBtn.removeEventListener("click", undoClick);
   display.textContent += ` ${equalBtn.textContent} ${(operate(firstNumber, operator, secondNumber).toFixed(3).replace(/\.?0+$/, ""))}`;
   firstNumber = +`${(operate(firstNumber, operator, secondNumber).toFixed(3).replace(/\.?0+$/, ""))}`;
 });
@@ -130,7 +145,7 @@ function operate(firstNumber, operator, secondNumber) {
   }
 }
 
-// 4 numeric functions:
+// 4 basic numeric functions:
 // add
 function add(...numbers) {
   return numbers.reduce((total, number) => {
