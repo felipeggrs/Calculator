@@ -106,7 +106,7 @@ equalBtn.addEventListener("click", () => {
   calculation = display.textContent.split(/(-?\d+)\s*([-+*\/])\s*(-?\d+)/);
   secondNumber = +calculation[3];
   if (secondNumber === 0) {
-    return display.textContent = "Silly boy. You know better.";
+    return display.textContent = "You know better";
   }
   dotBtn.removeEventListener("click", dotClick);
   undoBtn.removeEventListener("click", undoClick);
@@ -128,7 +128,7 @@ buttons.forEach(button => {
   button.addEventListener("click", () => {
       display.textContent += button.textContent;
   })
-})
+});
 
 // takes 3 arguments and works based on the operator used
 function operate(firstNumber, operator, secondNumber) {
@@ -170,3 +170,90 @@ function divide(...numbers) {
     return total /= number
   })
 }
+
+// keyboard support
+// equal operator
+window.addEventListener("keydown", (e) => {
+  if (e.key === "=" || e.key === "Enter") {
+    calculation = display.textContent.split(/(-?\d+)\s*([-+*\/])\s*(-?\d+)/);
+    secondNumber = +calculation[3];
+    if (secondNumber === 0) {
+      display.textContent = "You know better";
+    }
+    dotBtn.removeEventListener("click", dotClick);
+    undoBtn.removeEventListener("click", undoClick);
+    display.textContent += ` ${equalBtn.textContent} ${(operate(firstNumber, operator, secondNumber).toFixed(3).replace(/\.?0+$/, ""))}`;
+    firstNumber = +`${(operate(firstNumber, operator, secondNumber).toFixed(3).replace(/\.?0+$/, ""))}`;
+
+  // add operator  
+  } else if (e.key === "+") {
+    if (display.textContent.match(/[-+*/]/) && display.textContent.match(/[=]/)) {
+    display.textContent = `${firstNumber}`;
+    } else if (display.textContent.match(/(-?\d+)\s*([-+*\/])\s*(-?\d+)/)) {
+    calculation = display.textContent.split(/(-?\d+)\s*([-+*\/])\s*(-?\d+)/);
+    secondNumber = +calculation[3];
+    firstNumber = `${(operate(firstNumber, operator, secondNumber).toFixed(3).replace(/\.?0+$/, ""))}`;
+    display.textContent = `${firstNumber}`;
+    }
+    undoBtn.addEventListener("click", undoClick);
+    dotBtn.addEventListener("click", dotClick); // used to limit "." to 1 per number
+    firstNumber = +display.textContent;
+    operator = "+";
+    display.textContent += addBtn.textContent;
+  } else if (e.key === "-") {
+    if (display.textContent.match(/[-+*/]/) && display.textContent.match(/[=]/)) {
+      display.textContent = `${firstNumber}`;
+    } else if (display.textContent.match(/(-?\d+)\s*([-+*\/])\s*(-?\d+)/)) {
+      calculation = display.textContent.split(/(-?\d+)\s*([-+*\/])\s*(-?\d+)/);
+      secondNumber = +calculation[3];
+      firstNumber = `${(operate(firstNumber, operator, secondNumber).toFixed(3).replace(/\.?0+$/, ""))}`;
+      display.textContent = `${firstNumber}`;
+    }
+    undoBtn.addEventListener("click", undoClick);
+    dotBtn.addEventListener("click", dotClick);
+    firstNumber = +display.textContent;
+    operator = "-";
+    display.textContent += subtractBtn.textContent;
+  } else if (e.key === "*") {
+    if (display.textContent.match(/[-+*/]/) && display.textContent.match(/[=]/)) {
+      display.textContent = `${firstNumber}`;
+    } else if (display.textContent.match(/(-?\d+)\s*([-+*\/])\s*(-?\d+)/)) {
+      calculation = display.textContent.split(/(-?\d+)\s*([-+*\/])\s*(-?\d+)/);
+      secondNumber = +calculation[3];
+      firstNumber = `${(operate(firstNumber, operator, secondNumber).toFixed(3).replace(/\.?0+$/, ""))}`;
+      display.textContent = `${firstNumber}`;
+    }
+    undoBtn.addEventListener("click", undoClick);
+    dotBtn.addEventListener("click", dotClick);
+    firstNumber = +display.textContent;
+    operator = "*";
+    display.textContent += multiplyBtn.textContent;
+  } else if (e.key === "/") {
+    if (display.textContent.match(/[-+*/]/) && display.textContent.match(/[=]/)) {
+      display.textContent = `${firstNumber}`;
+    } else if (display.textContent.match(/(-?\d+)\s*([-+*\/])\s*(-?\d+)/)) {
+      calculation = display.textContent.split(/(-?\d+)\s*([-+*\/])\s*(-?\d+)/);
+      secondNumber = +calculation[3];
+      firstNumber = `${(operate(firstNumber, operator, secondNumber).toFixed(3).replace(/\.?0+$/, ""))}`;
+      display.textContent = `${firstNumber}`;
+    }
+    undoBtn.addEventListener("click", undoClick);
+    dotBtn.addEventListener("click", dotClick);
+    firstNumber = +display.textContent;
+    operator = "/";
+    display.textContent += divideBtn.textContent;
+  } else if (/[\d]/.test(e.key)) {
+    display.textContent += e.key;
+  } else if (e.key === "c") {
+    firstNumber = 0;
+    secondNumber = 0;
+    operator = "";
+    display.textContent = "";
+    dotBtn.addEventListener("click", dotClick);
+    undoBtn.addEventListener("click", undoClick);
+  } else if (e.key === ".") {
+    display.textContent += dotBtn.textContent;
+  } else if (e.key === "Backspace") {
+    undoClick();
+  }
+  });
