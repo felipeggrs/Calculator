@@ -18,15 +18,18 @@ clearBtn.addEventListener("click", () => {
 // add button
 const addBtn = document.querySelector(".addBtn");
 addBtn.addEventListener("click", () => {
+  // if user previously clicked "="
   if (display.textContent.match(/[-+*/]/) && display.textContent.match(/[=]/)) {
     display.textContent = `${firstNumber}`;
-  } else if (display.textContent.match(/[-+*/]/)) {
-    calculation = display.textContent.split(/[-+*/]/);
-    secondNumber = +calculation[1];
+  // if user is chaining operations
+  } else if (display.textContent.match(/(-?\d+)\s*([-+*\/])\s*(-?\d+)/)) {
+    calculation = display.textContent.split(/(-?\d+)\s*([-+*\/])\s*(-?\d+)/);
+    secondNumber = +calculation[3];
     firstNumber = `${(operate(firstNumber, operator, secondNumber).toFixed(3).replace(/\.?0+$/, ""))}`;
     display.textContent = `${firstNumber}`;
   }
-  dotBtn.addEventListener("click", dotClick);
+  // user's first operation
+  dotBtn.addEventListener("click", dotClick); // used to limit "." to 1 per number
   firstNumber = +display.textContent;
   operator = "+";
   display.textContent += addBtn.textContent;
@@ -37,9 +40,9 @@ const subtractBtn = document.querySelector(".subtractBtn");
 subtractBtn.addEventListener("click", () => {
   if (display.textContent.match(/[-+*/]/) && display.textContent.match(/[=]/)) {
     display.textContent = `${firstNumber}`;
-  } else if (display.textContent.match(/[-+*/]/)) {
-    calculation = display.textContent.split(/[-+*/]/);
-    secondNumber = +calculation[1];
+  } else if (display.textContent.match(/(-?\d+)\s*([-+*\/])\s*(-?\d+)/)) {
+    calculation = display.textContent.split(/(-?\d+)\s*([-+*\/])\s*(-?\d+)/);
+    secondNumber = +calculation[3];
     firstNumber = `${(operate(firstNumber, operator, secondNumber).toFixed(3).replace(/\.?0+$/, ""))}`;
     display.textContent = `${firstNumber}`;
 }
@@ -54,9 +57,9 @@ const multiplyBtn = document.querySelector(".multiplyBtn");
 multiplyBtn.addEventListener("click", () => {
   if (display.textContent.match(/[-+*/]/) && display.textContent.match(/[=]/)) {
     display.textContent = `${firstNumber}`;
-  } else if (display.textContent.match(/[-+*/]/)) {
-    calculation = display.textContent.split(/[-+*/]/);
-    secondNumber = +calculation[1];
+  } else if (display.textContent.match(/(-?\d+)\s*([-+*\/])\s*(-?\d+)/)) {
+    calculation = display.textContent.split(/(-?\d+)\s*([-+*\/])\s*(-?\d+)/);
+    secondNumber = +calculation[3];
     firstNumber = `${(operate(firstNumber, operator, secondNumber).toFixed(3).replace(/\.?0+$/, ""))}`;
     display.textContent = `${firstNumber}`;
 }
@@ -71,9 +74,9 @@ const divideBtn = document.querySelector(".divideBtn");
 divideBtn.addEventListener("click", () => {
   if (display.textContent.match(/[-+*/]/) && display.textContent.match(/[=]/)) {
     display.textContent = `${firstNumber}`;
-  } else if (display.textContent.match(/[-+*/]/)) {
-    calculation = display.textContent.split(/[-+*/]/);
-    secondNumber = +calculation[1];
+  } else if (display.textContent.match(/(-?\d+)\s*([-+*\/])\s*(-?\d+)/)) {
+    calculation = display.textContent.split(/(-?\d+)\s*([-+*\/])\s*(-?\d+)/);
+    secondNumber = +calculation[3];
     firstNumber = `${(operate(firstNumber, operator, secondNumber).toFixed(3).replace(/\.?0+$/, ""))}`;
     display.textContent = `${firstNumber}`;
 }
