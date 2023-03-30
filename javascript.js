@@ -103,10 +103,12 @@ divideBtn.addEventListener("click", () => {
 // equal button
 const equalBtn = document.querySelector(".equalBtn");
 equalBtn.addEventListener("click", () => {
-  calculation = display.textContent.split(/(-?\d+)\s*([-+*\/])\s*(-?\d+)/);
+  calculation = display.textContent.split(/(-?\d*\.?\d+)\s*([-+*\/])\s*(-?\d*\.?\d+)/);
   secondNumber = +calculation[3];
+  console.log(calculation);
+  console.log(secondNumber);
   if (secondNumber === 0) {
-    return display.textContent = "You know better";
+    return display.textContent = "You know better.";
   }
   dotBtn.removeEventListener("click", dotClick);
   undoBtn.removeEventListener("click", undoClick);
@@ -175,7 +177,7 @@ function divide(...numbers) {
 // equal operator
 window.addEventListener("keydown", (e) => {
   if (e.key === "=" || e.key === "Enter") {
-    calculation = display.textContent.split(/(-?\d+)\s*([-+*\/])\s*(-?\d+)/);
+    calculation = display.textContent.split(/(-?\d*\.?\d+)\s*([-+*\/])\s*(-?\d*\.?\d+)/);
     secondNumber = +calculation[3];
     if (secondNumber === 0) {
       display.textContent = "You know better";
@@ -189,8 +191,8 @@ window.addEventListener("keydown", (e) => {
   } else if (e.key === "+") {
     if (display.textContent.match(/[-+*/]/) && display.textContent.match(/[=]/)) {
     display.textContent = `${firstNumber}`;
-    } else if (display.textContent.match(/(-?\d+)\s*([-+*\/])\s*(-?\d+)/)) {
-    calculation = display.textContent.split(/(-?\d+)\s*([-+*\/])\s*(-?\d+)/);
+    } else if (display.textContent.match(/(-?\d*\.?\d+)\s*([-+*\/])\s*(-?\d*\.?\d+)/)) {
+    calculation = display.textContent.split(/(-?\d*\.?\d+)\s*([-+*\/])\s*(-?\d*\.?\d+)/);
     secondNumber = +calculation[3];
     firstNumber = `${(operate(firstNumber, operator, secondNumber).toFixed(3).replace(/\.?0+$/, ""))}`;
     display.textContent = `${firstNumber}`;
@@ -200,11 +202,12 @@ window.addEventListener("keydown", (e) => {
     firstNumber = +display.textContent;
     operator = "+";
     display.textContent += addBtn.textContent;
+  // subtract operator
   } else if (e.key === "-") {
     if (display.textContent.match(/[-+*/]/) && display.textContent.match(/[=]/)) {
       display.textContent = `${firstNumber}`;
-    } else if (display.textContent.match(/(-?\d+)\s*([-+*\/])\s*(-?\d+)/)) {
-      calculation = display.textContent.split(/(-?\d+)\s*([-+*\/])\s*(-?\d+)/);
+    } else if (display.textContent.match(/(-?\d*\.?\d+)\s*([-+*\/])\s*(-?\d*\.?\d+)/)) {
+      calculation = display.textContent.split(/(-?\d*\.?\d+)\s*([-+*\/])\s*(-?\d*\.?\d+)/);
       secondNumber = +calculation[3];
       firstNumber = `${(operate(firstNumber, operator, secondNumber).toFixed(3).replace(/\.?0+$/, ""))}`;
       display.textContent = `${firstNumber}`;
@@ -214,11 +217,12 @@ window.addEventListener("keydown", (e) => {
     firstNumber = +display.textContent;
     operator = "-";
     display.textContent += subtractBtn.textContent;
+  // multiply operator
   } else if (e.key === "*") {
     if (display.textContent.match(/[-+*/]/) && display.textContent.match(/[=]/)) {
       display.textContent = `${firstNumber}`;
-    } else if (display.textContent.match(/(-?\d+)\s*([-+*\/])\s*(-?\d+)/)) {
-      calculation = display.textContent.split(/(-?\d+)\s*([-+*\/])\s*(-?\d+)/);
+    } else if (display.textContent.match(/(-?\d*\.?\d+)\s*([-+*\/])\s*(-?\d*\.?\d+)/)) {
+      calculation = display.textContent.split(/(-?\d*\.?\d+)\s*([-+*\/])\s*(-?\d*\.?\d+)/);
       secondNumber = +calculation[3];
       firstNumber = `${(operate(firstNumber, operator, secondNumber).toFixed(3).replace(/\.?0+$/, ""))}`;
       display.textContent = `${firstNumber}`;
@@ -228,11 +232,12 @@ window.addEventListener("keydown", (e) => {
     firstNumber = +display.textContent;
     operator = "*";
     display.textContent += multiplyBtn.textContent;
+  // divide operator
   } else if (e.key === "/") {
     if (display.textContent.match(/[-+*/]/) && display.textContent.match(/[=]/)) {
       display.textContent = `${firstNumber}`;
-    } else if (display.textContent.match(/(-?\d+)\s*([-+*\/])\s*(-?\d+)/)) {
-      calculation = display.textContent.split(/(-?\d+)\s*([-+*\/])\s*(-?\d+)/);
+    } else if (display.textContent.match(/(-?\d*\.?\d+)\s*([-+*\/])\s*(-?\d*\.?\d+)/)) {
+      calculation = display.textContent.split(/(-?\d*\.?\d+)\s*([-+*\/])\s*(-?\d*\.?\d+)/);
       secondNumber = +calculation[3];
       firstNumber = `${(operate(firstNumber, operator, secondNumber).toFixed(3).replace(/\.?0+$/, ""))}`;
       display.textContent = `${firstNumber}`;
@@ -242,8 +247,10 @@ window.addEventListener("keydown", (e) => {
     firstNumber = +display.textContent;
     operator = "/";
     display.textContent += divideBtn.textContent;
+  // 1-9 digits
   } else if (/[\d]/.test(e.key)) {
     display.textContent += e.key;
+  // clear button
   } else if (e.key === "c") {
     firstNumber = 0;
     secondNumber = 0;
@@ -251,9 +258,12 @@ window.addEventListener("keydown", (e) => {
     display.textContent = "";
     dotBtn.addEventListener("click", dotClick);
     undoBtn.addEventListener("click", undoClick);
+  // dot button
   } else if (e.key === ".") {
+    dotBtn.removeEventListener("click", dotClick);
     display.textContent += dotBtn.textContent;
-  } else if (e.key === "Backspace") {
+  // undo button
+  } else if (e.key === "Backspace" || e.key === "u") {
     undoClick();
   }
   });
